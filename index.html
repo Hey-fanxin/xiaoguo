@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>www.bianjunping.com</title>
+    <style>
+        body{background: #10f8ff;}
+        *{margin:0;padding:0;list-style:none;}
+        img{height:100%;}
+        ul{width:968px;height:516px;margin:20px auto;overflow:hidden;}
+        li{width:300px;height:150px;background: #0c656d;margin:10px;border:1px solid #10f8ff;float:left;font-size:50px;text-align:center;color:#000;line-height:150px;overflow:hidden;}
+        #btn{width:150px;position:absolute;bottom:30px;left:50%;margin-left:-50px;}
+        li a{width:100%;height:80px;opacity:0.6;position:absolute;left:0;bottom:-80px;color:#fff;background:#424040;line-height:80px;text-align:center;font-size:30px;text-decoration:none; }
+
+        #box2{display:none;}
+        #box2 li{background: #0c656d;}
+    </style>
+    <script src="../namebjp.github.io/js/common1.0.js"></script>
+    <script>
+        domReady(function () {
+            'use strict';
+            var oBox=document.getElementById('box');
+            var oBtn=document.getElementById('btn');
+            var oBox2=document.getElementById('box2');
+            var aLi2=oBox2.children;
+            var aLi=oBox.children;
+            var arr=[];
+            for(var i=0; i<aLi.length; i++){
+                arr[i]={
+                    left:aLi[i].offsetLeft,
+                    top:aLi[i].offsetTop
+                }
+            }
+            function setPos(name){
+                for(var i=0; i<name.length; i++){
+                    name[i].style.position='absolute';
+                    name[i].style.left=arr[i].left+'px';
+                    name[i].style.top=arr[i].top+'px';
+                    name[i].style.margin=0;
+                    name[i].onmouseover=function(){
+                        var aA=this.children[1];
+                        move(aA,{top:40})
+                    };
+                    name[i].onmouseout=function(){
+                        var aA=this.children[1];
+                        move(aA,{top:-80})
+                    }
+                }
+            }
+            setPos(aLi);
+            setPos(aLi2);
+            var timer;
+            var bFlag=true;
+            oBtn.onclick=function(ev){
+                if(!aLi[0].offsetWidth){
+                    aaa(ev,aLi2,aLi,'block','none');
+                    oBtn.value='下一页';
+                }else{
+                    aaa(ev,aLi,aLi2,'none','block');
+                    oBtn.value='上一页';
+                }
+            };
+            function aaa(ev,name1,name2,none,block){
+                if(bFlag==false)return;
+                bFlag=false;
+                var oEvent=ev||event;
+                var X=oEvent.clientX;
+                var Y=oEvent.clientY;
+                var n=aLi.length-1;
+                timer=setInterval(function(){
+                    ;(function(index){
+                        move(name1[n],{width:0,height:0,left:X,top:Y,opacity:0},{complete:function(){
+                            for(var i=0; i<name2.length; i++){
+                                name2[i].style.width=0;
+                                name2[i].style.height=0;
+                                name2[i].style.left=X+'px';
+                                name2[i].style.top=Y+'px';
+                            }
+                            if(index==0){
+                                oBox.style.display=none;
+                                oBox2.style.display=block;
+                                n=0;
+                                timer=setInterval(function(){
+                                    if(n==name1.length-1){
+                                        clearInterval(timer)}
+                                    move(name2[n],{width:300,height:150,left:arr[n].left,top:arr[n].top,opacity:1});
+                                    n++;
+                                    bFlag=true;
+                                },100);
+                            }
+                        }});
+                    })(n);
+                    n--;
+                    if(n==-1){
+                        clearInterval(timer)
+                    }
+                },100)
+            }
+        })
+    </script>
+</head>
+<body>
+<ul id="box">
+    <li>
+        <img src="img3/3d_pic.jpg" alt="">
+        <a href="../JSxiaoguo/3Dtuopianlunhuan/zns_demo5.html" target="_blank">3D图片轮换</a>
+    </li>
+    <li>
+        <img src="img3/accordion.jpg" alt="">
+        <a href="../JSxiaoguo/shoufengqin.html" target="_blank">手风琴效果</a>
+    </li>
+    <li>
+        <img src="img3/iphone.jpg" alt="">
+        <a href="../JSxiaoguo/iPhone/zns_demo.html" target="_blank">iP手机查看器</a>
+    </li>
+    <li>
+        <img src="img3/iphone_menu.jpg" alt="">
+        <a href="../JSxiaoguo/JD.html" target="_blank">JD图标距离感应</a>
+    </li>
+    <li>
+        <img src="img3/js_wall.jpg" alt="">
+        <a href="../JSxiaoguo/zhaopianqiang.html" target="_blank">可移动的照片墙</a>
+    </li>
+    <li>
+        <img src="img3/load.jpg" alt="">
+        <a href="../JSxiaoguo/lanjiazai.html" target="_blank">图片懒加载</a>
+    </li>
+    <li>
+        <img src="img3/20151221.jpg" alt="">
+        <a href="../JSxiaoguo/wufenggund.html" target="_blank">无缝滚动</a>
+    </li>
+    <li>
+        <img src="img3/kuliu.jpg" alt="">
+        <a href="../JSxiaoguo/zhonxinbianda.html" target="_blank">图片中心变大</a>
+    </li>
+    <li>
+        <img src="img3/web-1.jpg" alt="">
+        <a href="../JSxiaoguo/fadajing.html" target="_blank">放大镜tup</a>
+    </li>
+</ul>
+<ul id="box2">
+    <li>
+        <img src="img3/yuanyi%20.jpg" alt="">
+        <a href="../JSxiaoguo/yuanyund_1.html" target="_blank">园运动一</a>
+    </li>
+    <li>
+        <img src="img3/h1.jpg" alt="">
+        <a href="../JSxiaoguo/tanxinyund.html" target="_blank">弹性运动导航</a>
+    </li>
+    <li>
+        <img src="img3/tanqiu.png" alt="">
+        <a href="../JSxiaoguo/tanxinyund_2.html" target="_blank">弹性运动</a>
+    </li>
+    <li>
+        <img src="img3/yuaner.jpg" alt="">
+        <a href="../JSxiaoguo/yuanyund_2.html" target="_blank">园运动二</a>
+    </li>
+    <li>
+        <img src="img3/tuozhuai.png" alt="">
+        <a href="../JSxiaoguo/tuozhuai.html" target="_blank">面向对象拖拽</a>
+    </li>
+    <li>
+        <img src="img3/lagou1.png" alt="">
+        <a href="../JSxiaoguo/lagouwang.html" target="_blank">拉钩网</a>
+    </li>
+    <li>
+        <img src="img3/20151221.jpg" alt="">
+        <a href="../JSxiaoguo/wufenggund.html" target="_blank">无缝滚动</a>
+    </li>
+    <li>
+        <img src="img3/kuliu.jpg" alt="">
+        <a href="../JSxiaoguo/zhonxinbianda.html" target="_blank">图片中心变大</a>
+    </li>
+    <li>
+        <img src="img3/web-1.jpg" alt="">
+        <a href="../JSxiaoguo/fadajing.html" target="_blank">放大镜tup</a>
+    </li>
+</ul>
+<input type="button" id="btn" value="下一页">
+</body>
+</html>
